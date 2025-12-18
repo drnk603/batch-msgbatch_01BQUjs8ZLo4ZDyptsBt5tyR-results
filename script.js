@@ -653,11 +653,11 @@
   function validateField(field, value) {
     const fieldName = field.name || field.id;
     
-    if (field.hasAttribute('required') && !value.trim()) {
+    if (field.hasAttribute('required') && !value.toString().trim()) {
       return { valid: false, message: MESSAGES.required };
     }
 
-    if (!value.trim() && !field.hasAttribute('required')) {
+    if (!value.toString().trim() && !field.hasAttribute('required')) {
       return { valid: true, message: '' };
     }
 
@@ -677,7 +677,7 @@
         break;
 
       case 'phone':
-        if (!REGEX.phone.test(value.replace(/s/g, ''))) {
+        if (!REGEX.phone.test(value.replace(/\s/g, ''))) {
           return { valid: false, message: MESSAGES.invalidPhone };
         }
         break;
